@@ -92,6 +92,7 @@ if (Ti.Platform.osname !== "android"){
     Titanium.UI.iPad.SplitWindow,
     Titanium.UI.iPad.Popover,
     Titanium.UI.iOS.AdView,
+    Titanium.UI.iOS.AttributedString,
     Titanium.UI.iOS.CoverFlowView,
     Titanium.UI.iOS.DocumentViewer,
     Titanium.UI.iOS.TabbedBar,
