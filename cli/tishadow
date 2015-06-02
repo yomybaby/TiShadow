@@ -212,7 +212,6 @@ function execute(filename) {
   }
   program.commands.forEach(function(action){
     if(action._name == 'run'){
-      console.log(action);
       action.alloyCompileFile = undefined;
     }
   });
