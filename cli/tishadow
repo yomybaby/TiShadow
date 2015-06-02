@@ -210,6 +210,12 @@ function execute(filename) {
     argv.push("-f");
     argv.push(filename);
   }
+  program.commands.forEach(function(action){
+    if(action._name == 'run'){
+      console.log(action);
+      action.alloyCompileFile = undefined;
+    }
+  });
   program.parse(argv);
   // Display help on an invalid command
   if (program.args.length === 0 || typeof program.args[program.args.length -1] === 'string'){
