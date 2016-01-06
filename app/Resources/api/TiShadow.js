@@ -142,7 +142,8 @@ function restart() {
   if (Ti.Android) {
     var tools = require('bencoding.android.tools').createPlatform();
     //tools.restartApp(200);
-    tools.exitApp();
+    require("/api/UI").closeWithoutMain();
+    setTimeout(function(){tools.exitApp()},200);
   } else { 
     require("/api/UI").closeAll();
     require("/api/App").clearAll();

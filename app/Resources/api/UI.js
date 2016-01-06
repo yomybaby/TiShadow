@@ -130,3 +130,30 @@ exports.closeAll = function() {
 
   return;
 };
+
+exports.closeWithoutMain = function(){
+  for(var app in containers) {
+    if(!containers.hasOwnProperty(app)){
+      return;
+    }
+    
+    app = app || "__REPL";
+    if (app && containers[app]) {
+      var keys = _.keys(containers[app]).reverse();
+      keys.pop(); //remove last one;
+      keys.forEach(function(c) {
+        if (containers[app].hasOwnProperty(c)) {
+          var current = containers[app][c];
+          if (current.__tishadowDumb) {
+            unstack({app:app, container:c});
+          }
+          
+          log.debug("CLOSING: " + c);
+          log.debug(current.apiName, current.role);
+          current[current.__closeFn || 'close']({animated:false});
+        }
+      });
+    }
+    return
+  }
+}
