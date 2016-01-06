@@ -183,7 +183,7 @@
     <module platform="iphone" version="1.1.1">ti.compression</module>
     <module platform="iphone" version="0.2.0">yy.logcatcher</module>
     <module platform="iphone" version="0.2.2">yy.tidynamicfont</module>
-    <module platform="android" version="0.34">bencoding.android.tools</module>
+    <module platform="android" version="0.4">bencoding.android.tools</module>
   </modules>
 
 </ti:app>
