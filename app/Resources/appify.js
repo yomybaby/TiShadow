@@ -13,6 +13,7 @@ Titanium.App.idleTimerDisabled = true;
 var TiShadow = require("/api/TiShadow");
 TiShadow.Appify = "{{app_name}}";
 var Compression = require('ti.compression');
+var LoginView = require('/ui/LoginView');
 require("/lib/ti-mocha");
 
 // If new install clear cache
@@ -41,13 +42,29 @@ if(Ti.Platform.model === "Simulator") {
   host = "{{host}}";
 }
 
+var loginWin = Ti.UI.createWindow({
+  backgroundColor : 'white'
+});
+var login = new LoginView();
+loginWin.add(login);
+
+login.addEventListener('connect', function (e) {
+  alert('Please close app and launch again.');
+});
+
 //Call Home
 TiShadow.connect({
   proto: "{{proto}}",
   host : host,
-  port : "{{port}}",
+  port : Ti.App.Properties.getString("tishadow:port","{{port}}"),
   room : "{{room}}",
-  name : Ti.Platform.osname + ", " + Ti.Platform.version + ", " + Ti.Platform.address
+  name : Ti.Platform.osname + ", " + Ti.Platform.version + ", " + Ti.Platform.address,
+  onerror: function(o) {
+    var isReconnectAlert = o && o.advice === "reconnect";
+    if (o && !isReconnectAlert) {
+      loginWin.open();
+    }
+  }
 });
 
 //Use LogCatcher
@@ -63,4 +80,3 @@ Logger.addEventListener("error", function(e) {
 
 //Launch the app
 TiShadow.launchApp(path_name);
-
