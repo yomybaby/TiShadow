@@ -4,6 +4,9 @@
  */
 
 var config = require("../cli/support/config");
+var notifier = require('node-notifier');
+var path = require('path');
+
 require('colors');
 
 color = {
@@ -28,6 +31,16 @@ exports.log = function(level, name, msg) {
     process.stdout.write("\r" + msg + "\n> ");
   }else {
     console.log(msg);
+  }
+  
+  if(level == 'ERROR'){
+    notifier.notify({
+      icon: path.join(__dirname,'..','app','Resources','iphone','appicon@2x.png'),
+      title: 'TiShdow',
+      // message: (name ? "[" + name + "] ": "") + msg,
+      message: msg.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,''), //remove color ansi strings
+      sticky : true
+    });
   }
 };
 
