@@ -55,7 +55,7 @@ login.addEventListener('connect', function (e) {
 //Call Home
 TiShadow.connect({
   proto: "{{proto}}",
-  host : host,
+  host : Ti.App.Properties.getString("tishadow:address", host),
   port : Ti.App.Properties.getString("tishadow:port","{{port}}"),
   room : "{{room}}",
   name : Ti.Platform.osname + ", " + Ti.Platform.version + ", " + Ti.Platform.address,
